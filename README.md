@@ -1,7 +1,8 @@
-#Bank OCR - KATA
+# Bank OCR - KATA
 For more details, please visit: https://codingdojo.org/kata/BankOCR/
-##Problem Description
-###User Story 1
+
+## Problem Description
+### User Story 1
 You work for a bank, which has recently purchased an ingenious machine to assist in reading letters and faxes sent in by branch offices. The machine scans the paper documents, and produces a file with a number of entries which each look like this:
 ```
    _  _     _  _  _  _  _ 
@@ -13,7 +14,7 @@ Each entry is 4 lines long, and each line has 27 characters. The first 3 lines o
 
 Your first task is to write a program that can take this file and parse it into actual account numbers
 
-###User Story 2
+### User Story 2
 Having done that, you quickly realize that the ingenious machine is not in fact infallible. Sometimes it goes wrong in its scanning. The next step therefore is to validate that the numbers you read are in fact valid account numbers. A valid account number has a valid checksum. This can be calculated as follows:
 ```
 account number:  3  4  5  8  8  2  8  6  5
@@ -25,7 +26,7 @@ checksum calculation:
 ```
 So now you should also write some code that calculates the checksum for a given number, and identifies if it is a valid account number.
 
-###User Story 3
+### User Story 3
 Your boss is keen to see your results. He asks you to write out a file of your findings, one for each input file, in this format:
 ```
 457508000
@@ -36,7 +37,7 @@ Your boss is keen to see your results. He asks you to write out a file of your f
 
 ie the file has one account number per row. If some characters are illegible, they are replaced by a ?. In the case of a wrong checksum, or illegible number, this is noted in a second column indicating status.
 
-###User Story 4
+### User Story 4
 It turns out that often when a number comes back as ERR or ILL it is because the scanner has failed to pick up on one pipe or underscore for one of the figures. For example
 
 ```
