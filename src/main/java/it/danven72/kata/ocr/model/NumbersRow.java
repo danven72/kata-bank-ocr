@@ -10,16 +10,18 @@ public class NumbersRow {
     }
 
     public void parseRow(int rowIndex, String row) {
-        if (row.length() != 27) throw new IllegalArgumentException("Row length not valid: row length must be 27!");
-        int elemNumber = 0;
-        while (row.length() >= 3)
-        {
-            String chunk = row.substring(0, 3);
-            //System.out.println(chunk);
-            row = row.substring(chunk.length());
+        if (rowIndex < 3) {
+            if (row.length() != 27)
+                throw new IllegalArgumentException("Row length " + row.length() + " not valid: row length must be 27!");
+            int elemNumber = 0;
+            while (row.length() >= 3) {
+                String chunk = row.substring(0, 3);
+                //System.out.println("["+chunk+"]");
+                row = row.substring(chunk.length());
 
-            numberElements[elemNumber].add(rowIndex, chunk);
-            ++elemNumber;
+                numberElements[elemNumber].add(rowIndex, chunk);
+                ++elemNumber;
+            }
         }
     }
 

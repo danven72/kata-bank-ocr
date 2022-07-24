@@ -1,6 +1,7 @@
 package it.danven72.kata.ocr.model;
 
 public class NumberElement {
+    public final static NumberElement ZERO = new NumberElement(" _ ", "| |", "|_|");
     public final static NumberElement ONE = new NumberElement("   ", "  |", "  |");
     public final static NumberElement TWO = new NumberElement(" _ ", " _|", "|_ ");
     public final static NumberElement THREE = new NumberElement(" _ ", " _|", " _|");
@@ -33,7 +34,8 @@ public class NumberElement {
 
     public int getNumberValue() {
         int result = -1; // Ivalid value: convention
-        if (this.equals(ONE)) result = 1;
+        if (this.equals(ZERO)) result = 0;
+        else if (this.equals(ONE)) result = 1;
         else if (this.equals(TWO)) result = 2;
         else if (this.equals(THREE)) result = 3;
         else if (this.equals(FOUR)) result = 4;
@@ -64,6 +66,7 @@ public class NumberElement {
     }
 
     public static void main(String[] args) {
+        System.out.println(ZERO);
         System.out.println(ONE);
         System.out.println(TWO);
         System.out.println(THREE);
