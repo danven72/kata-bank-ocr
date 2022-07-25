@@ -16,18 +16,16 @@ public class NumbersRow {
     }
 
     public void parseRow(int rowIndex, String row) {
-        if (row.length() !=0) {
-            if (row.length() != 27)
-                throw new IllegalArgumentException("Row length " + row.length() + " not valid: row length must be 27!");
-            int elemNumber = 0;
-            while (row.length() >= 3) {
-                String chunk = row.substring(0, 3);
-                //System.out.println("["+chunk+"]");
-                row = row.substring(chunk.length());
+        if (row.length() != 27)
+            throw new IllegalArgumentException("Row length " + row.length() + " not valid: row length must be 27!");
+        int elemNumber = 0;
+        while (row.length() >= 3) {
+            String chunk = row.substring(0, 3);
+            //System.out.println("["+chunk+"]");
+            row = row.substring(chunk.length());
 
-                numberElements[elemNumber].add(rowIndex, chunk);
-                ++elemNumber;
-            }
+            numberElements[elemNumber].add(rowIndex, chunk);
+            ++elemNumber;
         }
     }
 
@@ -83,25 +81,31 @@ public class NumbersRow {
         try (
                 Stream<String> stream = Files.lines(Paths.get(res), StandardCharsets.UTF_8)
         ) {
-            List<String> rowList = stream.toList();
+            List<String> rowList = stream.filter(l -> l.length()!=0).toList();
+            int rowCounter = 0;
             for (int i=0; i<rowList.size(); i++) {
-                parseRow(i, rowList.get(i));
+                parseRow(rowCounter, rowList.get(i));
+                ++rowCounter;
+                if (rowCounter==3) {
+                   result.add(getOutputWithValidation(getSimpleOutput()));
+                    reset();
+                    rowCounter = 0;
+                }
             }
-            //System.out.println(numberRows.getSimpleOutput());
-            result.add((getOutputWithValidation(getSimpleOutput())));
         }
         return result;
     }
 
-    public void reset() {
+    private void reset() {
         for (int i=0; i< numberElements.length; i++) {
             numberElements[i] = new NumberElement();
         }
     }
 
+    public static void main(String[] args) throws Exception {
 
-    public static void main(String[] args) {
         NumbersRow nr = new NumbersRow();
+        /*
         nr.parseRow(0, "    _  _     _  _  _  _  _ ");
         nr.parseRow(1, "  | _| _||_||_ |_   ||_||_|");
         nr.parseRow(2, "  ||_  _|  | _||_|  ||_| _|");
@@ -111,5 +115,8 @@ public class NumbersRow {
         //System.out.println("Is fourth element a four: " + nr.numberElements[3].equals(NumberElement.FOUR));
 
         System.out.println(nr.getSimpleOutput());
+
+         */
+        System.out.println(nr.transformFile("input_files/threeLinesResult.txt"));
     }
 }
